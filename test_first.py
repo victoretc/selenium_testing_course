@@ -96,7 +96,7 @@ def test_auth_glitch_user(driver):
     login_button.click()
 
     sleep(10)
-    assert driver.current_url == 'https://www.saucedemo.com/'
+    assert driver.current_url == 'https://www.saucedemo.com/inventory.html'
 
     #закрываем окно браузера
     driver.close()      
