@@ -51,7 +51,7 @@ def test_invalid_auth(driver):
     login_button.click()
 
     sleep(10)
-    assert driver.current_url == 'https://www.saucedemo.com/'
+    assert driver.current_url == 'https://www.saucedemo.com/git add .'
 
     #закрываем окно браузера
     driver.close()
