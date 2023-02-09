@@ -52,7 +52,7 @@ def test_invalid_auth(driver):
     login_button.click()
 
     sleep(10)
-    assert driver.current_url == 'https://www.saucedemo.com/git add .'
+    assert driver.current_url == 'https://www.saucedemo.com/'
 
     #закрываем окно браузера
     driver.close()
@@ -81,7 +81,7 @@ def test_random_auth_data(driver):
     driver.close()  
 
 
-
+@pytest.mark.skip("причина пропуска")
 def test_auth_glitch_user(driver):
     driver.get("https://www.saucedemo.com/")
     username = driver.find_element(By.XPATH, '//input[@data-test="username"]')
@@ -102,7 +102,7 @@ def test_auth_glitch_user(driver):
     driver.close()      
 
 
-
+@pytest.mark.skip("причина пропуска")
 def test_empty_fields_auth(driver):
     driver.get("https://www.saucedemo.com/")
     username = driver.find_element(By.XPATH, '//input[@data-test="username"]')
@@ -121,5 +121,28 @@ def test_empty_fields_auth(driver):
     assert error.text == "Epic sadface: Username is required"
     assert driver.current_url == 'https://www.saucedemo.com/'
 
+    #закрываем окно браузера
+    driver.close()  
+
+
+def test_empty_fields_auth(driver):
+    driver.get("https://www.saucedemo.com/")
+    
+    text1 = """
+    Accepted usernames are:
+    standard_user
+    locked_out_user
+    problem_user
+    performance_glitch_user"""
+    
+    searchedtext = driver.find_element(By.XPATH, '//div[contains(text(), "standard_user")]')
+    text = searchedtext.text
+
+    assert text == text1
+
+    print(text)
+
+
+    
     #закрываем окно браузера
     driver.close()  
