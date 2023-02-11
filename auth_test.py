@@ -125,24 +125,28 @@ def test_empty_fields_auth(driver):
     driver.close()  
 
 
-def test_empty_fields_auth(driver):
+def test_auth_credentials_login(driver):
     driver.get("https://www.saucedemo.com/")
     
-    text1 = """
-    Accepted usernames are:
-    standard_user
-    locked_out_user
-    problem_user
-    performance_glitch_user"""
-    
-    searchedtext = driver.find_element(By.XPATH, '//div[contains(text(), "standard_user")]')
-    text = searchedtext.text
+    #список содержащий текст данных для авторизации (логин)
+    auth_credential_login_text = ['Accepted', 'usernames', 'are:', 'standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user']
 
-    assert text == text1
+    search_auth_credential_login = driver.find_element(By.XPATH, '//div[@id="login_credentials"]')
+    assert search_auth_credential_login.text.split() == auth_credential_login_text
 
-    print(text)
-
-
-    
     #закрываем окно браузера
     driver.close()  
+
+def test_auth_credentials_password(driver):
+    driver.get("https://www.saucedemo.com/")
+
+    #список содержащий текст данных для авторизации (пароль)
+    auth_credential_password_text = ['Password', 'for', 'all', 'users:', 'secret_sauce']
+
+    search_auth_credential_password = driver.find_element(By.XPATH, '//div[@class="login_password"]')
+    assert search_auth_credential_password.text.split() == auth_credential_password_text
+
+
+    
+
+    
