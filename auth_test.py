@@ -8,9 +8,22 @@ from selenium.webdriver.common.by import By
 from time import sleep
 
 @pytest.fixture()
-def driver():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+def get_chrome_options():
+    options = webdriver.ChromeOptions()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--headless')
+    options.add_argument('--start-maximized')
+    return options
+
+
+@pytest.fixture()
+def driver(get_chrome_options):
+    options = get_chrome_options
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     return driver
+
 
 @pytest.mark.skip("причина пропуска")
 def test_positive_auth(driver):
